@@ -218,6 +218,12 @@ def handle(text, mic, profile, bot=None):
                 mic.say(u"结束播放", cache=True)
                 music_player.stop()
                 return
+            elif input and any(ext in input for ext in [u"大", u"强", u"高"]):
+                os.system('amixer set PCM 1db+')
+                music_player.resume()
+            elif input and any(ext in input for ext in [u"小", u"低", u"弱"]):
+                os.system('amixer set PCM 1db-')
+                music_player.resume()
             else:
                 mic.say(u"什么？", cache=True)
                 music_player.resume()
